@@ -22,7 +22,7 @@ func _ready() -> void:
 
 	# 1. Patrol: the Orderly moves on his own.
 	var start := o.global_position
-	await _frames(180)
+	await _frames(360)   # he may idle up to 2.5 s at his first waypoint
 	_check(o.global_position.distance_to(start) > 2.0, "Orderly patrols (moved %.1f m)" % o.global_position.distance_to(start))
 
 	# 2. Hearing: a loud noise nearby makes him investigate.
