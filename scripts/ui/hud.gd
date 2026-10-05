@@ -132,7 +132,7 @@ func _process(delta: float) -> void:
 		_rec_label.text = "● REC" if fmod(_rec_time, 1.0) < 0.6 else "   REC"
 		_time_label.text = "%02d:%02d:%02d" % [int(_rec_time / 3600), int(_rec_time / 60) % 60, int(_rec_time) % 60]
 		var bars := ceili(player.battery * 4.0)
-		_batt_label.text = "[%s%s] x%d" % ["▮".repeat(bars), "▯".repeat(4 - bars), player.spare_batteries]
+		_batt_label.text = "[%s%s] x%d" % ["|".repeat(bars), ".".repeat(4 - bars), player.spare_batteries]
 		_batt_label.modulate = Color(1, 0.3, 0.3) if player.battery < 0.25 else Color.WHITE
 		_nv_label.text = "NIGHT VISION" if player.night_vision else "NV OFF [F]"
 	_breath.value = player.breath

@@ -1,0 +1,22 @@
+<script>
+// index.wasm ships gzipped; decompress it in the browser.
+(function () {
+	// Static hosts only serve standard web types, so the game data (.pck) and the gzipped
+	// engine are published under .wasm names and mapped back here.
+	const realFetch = window.fetch.bind(window);
+	window.fetch = function (input, init) {
+		const url = typeof input === "string" ? input : input.url;
+		if (url && /index\.pck(\?|$)/.test(url)) {
+			return realFetch(url.replace(/index\.pck/, "data.pck.wasm"), init);
+		}
+		if (url && /index\.wasm(\?|$)/.test(url)) {
+			return realFetch(url.replace(/index\.wasm/, "engine.gz.wasm"), init).then(function (r) {
+				if (!r.ok) return r;
+				const body = r.body.pipeThrough(new DecompressionStream("gzip"));
+				return new Response(body, { status: 200, headers: { "Content-Type": "application/wasm" } });
+			});
+		}
+		return realFetch(input, init);
+	};
+})();
+</script>

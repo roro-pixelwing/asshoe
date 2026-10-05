@@ -8,6 +8,9 @@ a camcorder's night vision. Inspired by the *design* of Outlast, with original s
 | ![](docs/screenshots/2_corridor.png) | ![](docs/screenshots/3_nightvision.png) |
 
 ## Play
+**In the browser:** build with `GODOT=/path/to/godot tools/build_web.sh` and serve `export/web/` (also published as a private Claude artifact).
+
+**In Godot:**
 1. Install [Godot 4.3+](https://godotengine.org/download) (standard build, free).
 2. Open Godot → Import → select this folder's `project.godot` → press **F5**.
 
